@@ -1,0 +1,48 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-buttons>
+            <button ion-button (click)="cerrar_modal()">
+                Cerrar
+            </button>
+        </ion-buttons>
+        <ion-title text-center>{{ titulo | placeHolder:'Crear nuevo post' }}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+
+        <ion-item>
+            <ion-label floating>Titulo</ion-label>
+            <ion-input type="text" [(ngModel)]="titulo"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <img src="https://cdn.pixabay.com/photo/2017/12/18/09/54/lago-di-limides-3025780__340.jpg" alt="">
+        </ion-item>
+
+    </ion-list>
+
+
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <button ion-button block icon-left>
+                    <ion-icon name="photos"></ion-icon>
+                    Seleccionar
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button block icon-left>
+                            <ion-icon name="camera"></ion-icon>
+                            Camara
+                        </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+</ion-content>
