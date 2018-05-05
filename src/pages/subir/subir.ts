@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 
+import { CargaArchivoProvider } from "../../providers/carga-archivo/carga-archivo";
+
 // Plugins
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
@@ -12,12 +14,14 @@ import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 })
 export class SubirPage {
 
-  titulo:string;
-  imagenPreview: string;
+  titulo:string = "";
+  imagenPreview: string = "";
+  imagen64: string;
 
   constructor(public viewCtrl: ViewController,
               private camera: Camera,
-              private imagePicker: ImagePicker) {
+              private imagePicker: ImagePicker,
+              public _cap: CargaArchivoProvider ) {
   }
 
   
@@ -37,6 +41,7 @@ export class SubirPage {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64:
      this.imagenPreview = 'data:image/jpeg;base64,' + imageData;
+     this.imagen64 = imageData;
 
     }, (err) => {
      // Handle error
@@ -58,12 +63,27 @@ export class SubirPage {
           // console.log('Image URI: ' + results[i]);
 
           this.imagenPreview = 'data:image/jpeg;base64,' + results[i];
+          this.imagen64 = results[i];
       }
     }, (err) => { 
         console.log("Error en selector", JSON.stringify( err ));
         
     });
   }
+
+
+  crear_post() {
+    let archivo = {
+      img: this.imagen64,
+      titulo: this.titulo
+    } 
+    
+    this._cap.cargar_imagen_firebase(archivo)
+          .then( ()=>this.cerrar_modal() );
+
+  }
+
+
 
 }
 
