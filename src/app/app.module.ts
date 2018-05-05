@@ -41,9 +41,9 @@ import { SubirPage } from '../pages/subir/subir';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    // AngularFireModule.initializeApp(firebaseConfig),
-    // AngularFireDatabaseModule,
-    // AngularFireAuthModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     PipesModule
   ],
   bootstrap: [IonicApp],
@@ -55,7 +55,7 @@ import { SubirPage } from '../pages/subir/subir';
   providers: [
     StatusBar,
     SplashScreen,
-    // AngularFireDatabase,
+    AngularFireDatabase,
     Camera,
     ImagePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

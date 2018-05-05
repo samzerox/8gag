@@ -14,12 +14,14 @@ export class HomePage {
 
   posts: Observable<any[]>;
 
-  constructor(private modalCtrl: ModalController) {
-  // constructor(private modalCtrl: ModalController,
-  //             private afDB: AngularFireDatabase) {
+  // constructor(private modalCtrl: ModalController) {
+  constructor(private modalCtrl: ModalController,
+              private afDB: AngularFireDatabase) {
     
 
-                // this.posts = afDB.list('post').valueChanges();
+                this.posts = afDB.list('posts').valueChanges();
+                console.log(this.posts);
+                
 
   }
 
