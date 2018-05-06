@@ -3,8 +3,10 @@ import { ModalController } from 'ionic-angular';
 
 import { SubirPage } from "../subir/subir";
 
-import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
+// import { AngularFireDatabase } from 'angularfire2/database';
+// import { Observable } from 'rxjs/Observable';
+
+import { CargaArchivoProvider } from "../../providers/carga-archivo/carga-archivo";
 
 @Component({
   selector: 'page-home',
@@ -12,15 +14,14 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomePage {
 
-  posts: Observable<any[]>;
+  // posts: Observable<any[]>;
+  hayMas: boolean = true;
 
-  // constructor(private modalCtrl: ModalController) {
   constructor(private modalCtrl: ModalController,
-              private afDB: AngularFireDatabase) {
+              private _cap: CargaArchivoProvider) {
     
 
-                this.posts = afDB.list('posts').valueChanges();
-                console.log(this.posts);
+                // this.posts = afDB.list('posts').valueChanges();
                 
 
   }
@@ -30,5 +31,19 @@ export class HomePage {
 
     modal.present();
   }
+
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+      
+    this._cap.cargar_imagenes().then(
+      ( hayMas:boolean ) =>{ 
+        this.hayMas = hayMas;
+        infiniteScroll.complete();
+      }
+    );
+  }
+
+
 
 }
