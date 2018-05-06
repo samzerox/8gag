@@ -8,6 +8,9 @@ import { SubirPage } from "../subir/subir";
 
 import { CargaArchivoProvider } from "../../providers/carga-archivo/carga-archivo";
 
+// Plugins
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -18,7 +21,8 @@ export class HomePage {
   hayMas: boolean = true;
 
   constructor(private modalCtrl: ModalController,
-              private _cap: CargaArchivoProvider) {
+              private _cap: CargaArchivoProvider,
+              private socialSharing: SocialSharing) {
     
 
                 // this.posts = afDB.list('posts').valueChanges();
@@ -42,6 +46,15 @@ export class HomePage {
         infiniteScroll.complete();
       }
     );
+  }
+
+
+  compartir( post: any ) {
+      
+    // Share via email
+    this.socialSharing.shareViaWhatsApp(post.titulo, post.img, post.img)
+          .then( ()=> {} ) // se pudo comartir
+          .catch( () => {} ) //si sucede un error
   }
 
 
